@@ -3,8 +3,8 @@
  * @Date: 2020-07-19 10:13:00
  * @Author: goEval
  * @LastEditors: goEval
- * @LastEditTime: 2020-07-19 19:17:49
- * @FilePath: \HomeworkCLI\HomeworkUpload.ts
+ * @LastEditTime: 2020-07-22 20:32:45
+ * @FilePath: \HomeworkCLI\src\tools\HomeworkUpload.ts
  * @Github: https://github.com/heqyou_free
  */
 import OSS from 'ali-oss';
@@ -13,9 +13,9 @@ import fs from 'fs';
 import path from 'path';
 import readline from 'readline';
 import * as uuid from 'uuid';
-import * as HomeworkCLI from './HomeworkCLI';
+import HomeworkCLI from '../HomeworkCLI';
 
-console.log('HomeworkUpload [Version 1.0] (HomeworkCLI [Version 1.0.2])'.blue);
+console.log(`HomeworkUpload [Version 1.0] (HomeworkCLI [Version ${HomeworkCLI.version}])`.blue);
 console.log('Copyright (c) 2020 goEval. All right reserved.'.blue);
 console.log('This software is licensed under MIT License.'.blue);
 console.log('Warning: This is a pre-release version, may come with bugs.'.yellow.bgRed);
@@ -55,10 +55,8 @@ const teacher = new HomeworkCLI.HomeworkCLI();
       if (fs.existsSync(pathstr)) {
         if (fs.statSync(pathstr).isDirectory()) {
           const array = fs.readdirSync(pathstr);
-          console.log(array);
           for (let i = 0; i < array.length; i++) {
             const element = array[i];
-            console.log(path.join(pathstr, element));
             if (!fs.statSync(path.join(pathstr, element)).isDirectory()) {
               await upload(path.join(pathstr, element));
             }
