@@ -16,3 +16,8 @@ jobs:
       run: yarn install
     - name: tsc
       uses: icrawl/action-tsc@v1
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build
+        path: /home/runner/work/HomeworkCLI/HomeworkCLI/
