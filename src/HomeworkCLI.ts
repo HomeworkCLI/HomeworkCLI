@@ -115,12 +115,23 @@ namespace HomeworkCLI {
      */
     // #region StudentAPI
     /**
-     * listStuClassDoc
+     * coursewareList
      * @param {number} page page
      * @return {Promise<HomeworkResponse>}
      */
     coursewareList(page: number): Promise<HomeworkResponse> {
       return this.post(urls.coursewarelist, this.encryptFormData({
+        page: page,
+        userid: this.userid,
+      }));
+    }
+    /**
+     * mycoursewareList
+     * @param {number} page page
+     * @return {Promise<HomeworkResponse>}
+     */
+    mycoursewareList(page: number): Promise<HomeworkResponse> {
+      return this.post(urls.mycoursewarelist, this.encryptFormData({
         page: page,
         userid: this.userid,
       }));

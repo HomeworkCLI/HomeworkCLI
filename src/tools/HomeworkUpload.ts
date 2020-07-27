@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /*
  * @Date: 2020-07-19 10:13:00
  * @Author: goEval
@@ -79,9 +78,9 @@ const teacher = new HomeworkCLI.HomeworkCLI();
 function upload(file: string): Promise<HomeworkCLI.HomeworkResponse> {
   console.log('uploading ' + file);
   const md5 = uuid.v4();
-  const ossfile = `aliba/upload/HomeworkUpload/${md5}/0.0${path.extname(file)}`;
+  const ossfile = `aliba/upload/HomeworkUpload/${md5}/0.0${path.parse(file).name}`;
   return client.put(ossfile, fs.createReadStream(file)).then(async (value) => {
-    console.log('saving document');
+    console.log(`saving document, document uuid: ${md5}`.gray);
     return teacher.saveDocNew({
       title: path.basename(file),
       doctype: path.extname(file).slice(1),
@@ -103,7 +102,7 @@ function upload(file: string): Promise<HomeworkCLI.HomeworkResponse> {
       creator: teacher.userid,
     });
   }).then((value) => {
-    console.log('sharing document');
+    console.log(`sharing document, document id: ${value.data.docid}`.gray);
     return teacher.shareDoc('1', '', value.data.docid, student.userid);
   });
 }
