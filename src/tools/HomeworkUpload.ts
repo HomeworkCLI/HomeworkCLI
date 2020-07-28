@@ -73,12 +73,12 @@ const teacher = new HomeworkCLI.HomeworkCLI();
 /**
  * upload
  * @param {string} file path to file
- * @return {Promise<HomeworkCLI.HomeworkResponse>}
+ * @return {Promise<OSS.NormalSuccessResponse>}
  */
-function upload(file: string): Promise<HomeworkCLI.HomeworkResponse> {
+function upload(file: string): Promise<OSS.NormalSuccessResponse> {
   console.log('uploading ' + file);
   const md5 = uuid.v4();
-  const ossfile = `aliba/upload/HomeworkUpload/${md5}/0.0${path.parse(file).name}`;
+  const ossfile = `aliba/upload/HomeworkUpload/${md5}/0.0${path.extname(file)}`;
   return client.put(ossfile, fs.createReadStream(file)).then(async (value) => {
     console.log(`saving document, document uuid: ${md5}`.gray);
     return teacher.saveDocNew({
@@ -104,5 +104,8 @@ function upload(file: string): Promise<HomeworkCLI.HomeworkResponse> {
   }).then((value) => {
     console.log(`sharing document, document id: ${value.data.docid}`.gray);
     return teacher.shareDoc('1', '', value.data.docid, student.userid);
+  }).then((value) => {
+    console.log(`putting ACL, response code: ${value.code}`);
+    return client.putACL(ossfile, 'public-read');
   });
 }
