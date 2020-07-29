@@ -41,16 +41,21 @@ const client = new OSS({
 const student = new HomeworkCLI.HomeworkCLI();
 const teacher = new HomeworkCLI.HomeworkCLI();
 (async () => {
-  await student.clientLogin(
-      await question('Username: '),
-      await question('Password: '),
-      true,
-  );
+  if (fs.existsSync('./homeworkcli.json')) {
+    const homeworkdata: HomeworkCLI.HomeworkData = JSON.parse(fs.readFileSync('./homeworkcli.json').toString());
+    student.offlineLogin(homeworkdata.userid, homeworkdata.token);
+  } else {
+    await student.clientLogin(await question('Username: '), await question('Password: '), true);
+    fs.writeFileSync('./homeworkcli.json', JSON.stringify(student.getData()));
+  }
   teacher.offlineLogin('inavamirb6netdi69uwp6g');
-  let pathstr;
+  let pathstr: string;
   while (true) {
     while (true) {
       pathstr = await question('Drag&Drop yout file and press enter to upload or press Ctrl-C to exit: '.green);
+      while (pathstr.endsWith(' ')) {
+        pathstr = pathstr.slice(0, -1);
+      }
       if (fs.existsSync(pathstr)) {
         if (fs.statSync(pathstr).isDirectory()) {
           const array = fs.readdirSync(pathstr);
@@ -99,13 +104,13 @@ function upload(file: string): Promise<OSS.NormalSuccessResponse> {
       categoryid: 'ghnvak6jnkdoh0hg1pdowq',
       categoryname: '课件',
       isschool: false,
-      creator: teacher.userid,
+      creator: teacher.getData().userid,
     });
   }).then((value) => {
     console.log(`sharing document, document id: ${value.data.docid}`.gray);
-    return teacher.shareDoc('1', '', value.data.docid, student.userid);
+    return teacher.shareDoc('1', '', value.data.docid, student.getData().userid);
   }).then((value) => {
-    console.log(`putting ACL, response code: ${value.code}`);
+    console.log(`putting ACL, response code: ${value.code}`.gray);
     return client.putACL(ossfile, 'public-read');
   });
 }

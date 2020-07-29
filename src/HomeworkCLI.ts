@@ -35,16 +35,15 @@ namespace HomeworkCLI {
    * @class
    */
   export class HomeworkCLI {
-    userid: string;
-    token: string;
-    schoolId: string;
-    cycoreId: string;
-    displayName: string;
-
+    private userid: string;
+    private token: string;
+    private schoolId: string;
+    private cycoreId: string;
+    private displayName: string;
     private baseUrl = 'http://www.yixuexiao.cn/';
-    mac = '03:03:03:03:03:03';
-    machine = 'HomeworkCLI';
-    osVersion = '11.0';
+    private mac = '03:03:03:03:03:03';
+    private machine = 'HomeworkCLI';
+    private osVersion = '11.0';
 
     /**
      * construtor
@@ -404,6 +403,48 @@ namespace HomeworkCLI {
         reuserid: reuserid,
       });
     }
+    /**
+     * save data
+     * @return {HomeworkData}
+     */
+    getData(): HomeworkData {
+      const data: HomeworkData = {
+        userid: this.userid,
+        token: this.token,
+        schoolId: this.schoolId,
+        cycoreId: this.cycoreId,
+        displayName: this.displayName,
+      };
+      return data;
+    }
+    /**
+     * set base url
+     * @param {string} url url
+     */
+    setBaseUrl(url: string) {
+      this.baseUrl = url;
+    }
+    /**
+     * setmac
+     * @param {string} mac mac
+     */
+    setMac(mac:string) {
+      this.mac = mac;
+    }
+    /**
+     * set machine
+     * @param {string} machine machine
+     */
+    setMachine(machine:string) {
+      this.machine = machine;
+    }
+    /**
+     * set osVersion
+     * @param {string} osVersion osVersion
+     */
+    setosVersion(osVersion:string) {
+      this.osVersion = osVersion;
+    }
     // #endregion PublicAPI
 
 
@@ -420,7 +461,7 @@ namespace HomeworkCLI {
      * @return {Promise<Object>} object
      * @private
      */
-    get(url: string, data: object): Promise<object> {
+    private get(url: string, data: object): Promise<object> {
       return new Promise((resolve, reject) => {
         axios.get(url, {
           params: data,
@@ -492,6 +533,14 @@ namespace HomeworkCLI {
     list?: Array<any>;
     msg?: string;
     responsetime?: number;
+  }
+
+  export interface HomeworkData {
+    userid: string;
+    token: string;
+    schoolId: string;
+    cycoreId: string;
+    displayName: string;
   }
 
   /**
