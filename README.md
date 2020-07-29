@@ -4,6 +4,7 @@ You are welcome to join us to improve this project.
 [Chinese README](./README_CN.md)
 ## Functions
 1. HomeworkUpload - upload file as document and send it
+2. GetExp - get exp daily
 ## How to use
 ### Build from soure
 Before you start, you should install [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/)
@@ -30,8 +31,7 @@ See [releases](https://github.com/HomeworkCLI/HomeworkCLI/releases/latest)
 Codes are written and tested on ArchLinux. There may be problems on Windows. Please indicate your system when reporting problems.
 ## TODO
 1. HomeworkMessageServer - send chat message to control server
-2. GetExp - get exp daily
-3. More APIs...
+2. More APIs...
 ## LICENSE
 MIT License
 

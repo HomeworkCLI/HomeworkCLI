@@ -4,6 +4,7 @@ Homework Platform API in Typescript
 [English README](./README.md)
 ## 功能
 1. HomeworkUpload - 上传文件并分享
+2. GetExp - 每日经验最大化
 ## 使用方法
 ### 从源码编译
 开始前，请安装[Node.js](https://nodejs.org/)和[Git](https://git-scm.com/)
@@ -30,8 +31,7 @@ node build/tools/HomeworkUpload.js
 代码是在ArchLinux上编写和测试的。在Windows上可能会有问题。在报告问题时请注明您的系统。
 ## TODO
 1. HomeworkMessageServer - 通过私信控制服务器
-2. GetExp - 每日经验最大化
-3. 更多API...
+2. 更多API...
 ## 许可证
 MIT License
 

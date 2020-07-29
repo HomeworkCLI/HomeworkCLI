@@ -1,8 +1,8 @@
 /node_modules
 /.editorconfig
 /build
-/src/tools/GetExp.ts
 /src/tools/server/server.ts
 /src/tools/server/README.md
 /src/tools/server/index.ts
 /.vscode
+/homeworkcli.json
