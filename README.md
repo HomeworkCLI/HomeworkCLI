@@ -1,3 +1,5 @@
+# Deprecated!
+As we are planning to rewrite it in C#, this project is no longer updated.
 # HomeworkCLI
 Homework Platform API in Typescript  
 You are welcome to join us to improve this project.  
